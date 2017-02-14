@@ -1,0 +1,18 @@
+{
+  "_args": [
+    [
+      "jasmine-spec-reporter",
+      "../"
+    ]
+  ],
+  "_location": "/jasmine-spec-reporter",
+  "_nodeVersion": "4.2.2",
+  "_spec": "jasmine-spec-reporter",
+  "_where": "../../",
+  "dependencies": {
+    "colors": "1.1.2"
+  },
+  "main": "src/jasmine-spec-reporter.js",
+  "name": "jasmine-spec-reporter",
+  "version": "2.7.0"
+}

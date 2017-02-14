@@ -1,0 +1,18 @@
+{
+  "_args": [
+    [
+      "colors@1.1.2",
+      "../../jasmine-spec-reporter"
+    ]
+  ],
+
+  "_location": "/colors",
+  "_requiredBy": [
+    "/jasmine-spec-reporter"
+  ],
+  "_where": "../../jasmine-spec-reporter",
+  "license": "MIT",
+  "main": "lib",
+  "name": "colors",
+  "version": "1.1.2"
+}

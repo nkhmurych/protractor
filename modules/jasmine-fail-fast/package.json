@@ -1,0 +1,20 @@
+{
+  "_args": [
+    [
+      "jasmine-fail-fast@~2.0.0",
+      "../../protractor-fail-fast"
+    ]
+  ],
+  "_location": "/jasmine-fail-fast",
+
+  "_requested": {
+    "name": "jasmine-fail-fast"
+  },
+  "_requiredBy": [
+    "/protractor-fail-fast"
+  ],
+  "_where": "../../protractor-fail-fast",
+  "main": "dist/jasmine-fail-fast.js",
+  "name": "jasmine-fail-fast",
+  "version": "2.0.0"
+}
