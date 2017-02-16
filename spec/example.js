@@ -12,8 +12,8 @@ describe(testsName, function () {
     });
 
     /**Test Rail Integrations*/
-    /*afterEach(function(done){
+    afterEach(function(done){
         tests.takeScreenShotsIfSpecFailed(testsName);
-        tests.testRail(done, 1, test_plan, 7, testsName)
-    });*/
+        tests.testRail(done, 1, 'plan', 7, testsName)
+    });
 });

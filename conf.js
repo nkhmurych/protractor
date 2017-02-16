@@ -31,6 +31,9 @@ exports.config = {
         var failFast = require('./modules/protractor-fail-fast');
         var AllureReporter = require('jasmine-allure-reporter');
 
+        var TestRail = require("testrail-promise");
+        global.tr = new TestRail('url', 'user', 'pass');
+
         jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}));
         jasmine.getEnv().addReporter(failFast.init());
 

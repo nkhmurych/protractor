@@ -32,7 +32,7 @@ var utils = {
     openSite : function(url) {
         browser.get(url);
         console.log('URL is: ' + url);
-        // expect(browser.getCurrentUrl()).toEqual(url);
+        expect(browser.getCurrentUrl()).toEqual(url);
     },
 
     /**example tests.openNewPage('http://www.example.com')*/
