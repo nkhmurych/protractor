@@ -1,4 +1,4 @@
-Run test protractor tests/protractor/conf.js
+Run test protractor protractor/protractor.conf.js
 
 Control browser
     browser.get('yoururl');

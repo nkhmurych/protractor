@@ -69,13 +69,14 @@ exports.config = {
                 '--window-size=1920,1080',
                 '--ignore-certificate-errors',
                 '--ssl-protocol=tlsv1',
+                '--disable-extensions',
                 '--disable-web-security'
             ],
             prefs: {
                 'download': {
                     'prompt_for_download': false,
                     'directory_upgrade': true,
-                    'default_directory': 'protractor/helpers/functions/'
+                    'default_directory': 'example/'
                 }
             }
         }
