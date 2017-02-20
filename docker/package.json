@@ -1,0 +1,6 @@
+{
+	"dependencies" : {
+		"jasmine-allure-reporter" : "~1",
+		"testrail-promise" : "~0"
+	}
+}
