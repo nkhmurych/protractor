@@ -1,22 +1,26 @@
 Run test protractor protractor/protractor.conf.js
 
 Control browser
+---------------
     browser.get('yoururl');
     browser.navigate().back();
     browser.navigate().forward();
     browser.ignoreSynchronization = true;
 
 Check visibility
+----------------
     element(by.id('create')).isPresent();
     element(by.id('create')).isEnabled();
     element(by.id('create')).isDisplayed();
 
 Send keystrokes
+---------------
     element(by.id('user_name').sendKeys('user1');
     sendKeys(protractor.Key.ENTER);
     sendKeys(protractor.Key.TAB);
 
 Find collection of elements
+---------------------------
     expect(list.count()).toBe(3);
     expect(list.get(0).getText()).toBe('First');
     expect(list.get(1).getText()).toBe('Second');
@@ -30,6 +34,7 @@ Find collection of elements
     var allOptions = element.all(by.options('c c in colors'))
 
 Methods to find elements on web page
+------------------------------------
     Find elements by Id: browser.driver.findElement(by.id('elem_id'));
     Find elements by name: browser.driver.findElement(by.name('elem_name'));
     Find elements by xpath: browser.driver.findElement(by.xpath('elem_xpath'));
@@ -57,4 +62,6 @@ Methods to find elements on web page
     $('ul li').last()            // select last of children
     $('ul li').get(index)        // select index-th of children
 
+Run Elementor
+-------------
     elementor https://www.google.com --nonAngular
