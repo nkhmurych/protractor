@@ -49,7 +49,7 @@ var utils = {
             return browser.isElementPresent(el).then(function(el){
                 return el === false;
             });
-        }, timeout || TIMEOUT);
+        }, timeout || TIMEOUT, 'Wait element timed out :' + el);
     },
 
    isApproachable: function(selector, timeout) {
@@ -57,7 +57,7 @@ var utils = {
            return element(selector).isPresent().then(function (present) {
                return present ? element(selector).isDisplayed() : false;
            });
-       }, timeout || TIMEOUT);
+       }, timeout || TIMEOUT, 'Wait element timed out :' + selector);
    },
 
     /**Asserts that the element matching the provided selector expression is not visible*/
@@ -67,7 +67,7 @@ var utils = {
             return browser.isElementPresent(el).then(function(el){
                 return el === true;
             });
-        }, TIMEOUT);
+        }, TIMEOUT, 'Wait element timed out :' + el);
     },
 
     assertNotPresent: function (selector) {
@@ -77,14 +77,13 @@ var utils = {
 
     assertIsDisplayed: function (selector) {
         element(selector).isDisplayed().then(function() {
+            console.log('check element : ' + selector);
             expect(element(selector).isPresent()).toBe(true);
         });
     },
 
     assertIsNotDisplayed: function (selector) {
-        element(selector).isDisplayed().then(function () {
-            expect(element(selector).isPresent()).toBe(false)
-        })
+        expect(element(selector).isDisplayed()).toBe(false)
     },
 
     /**example tests.assertTextEqual(by.className("login-heading"), 'SIGN IN')*/
@@ -123,14 +122,14 @@ var utils = {
                 console.log('is visible :' + isVisible);
                 return !isVisible;
             });
-        }, timeout || TIMEOUT);
+        }, timeout || TIMEOUT, 'Wait element timed out :' + selector);
     },
 
     assertNotVisibleAndNotExist: function (selector, timeout) {
         browser.wait(function () {
             console.log('check ' + selector);
             expect(element(selector).isDisplayed()).toBe(false);
-        }, timeout || TIMEOUT)
+        }, timeout || TIMEOUT, 'Wait element timed out :' + selector)
     },
 
     /**example tests.assertSelectorHasText(by.xpath('selector'), expected)*/
@@ -206,12 +205,13 @@ var utils = {
             return browser.isElementPresent(selector).then(function (el) {
                 return el === true;
             });
-        }, timeout || TIMEOUT);
+        }, timeout || TIMEOUT, 'Wait element timed out :' + selector);
     },
 
     /**example tests.waitForCount(selector, count)*/
     waitForCount: function(selector, expectedCount) {
-        browser.wait(waitCount(selector, expectedCount), TIMEOUT);
+        browser.wait(waitCount(selector, expectedCount), TIMEOUT,
+            'Wait element timed out :' + selector);
         function waitCount(selector, expectedCount) {
             return function () {
                 return element.all(selector).count().then(function (actualCount) {
@@ -231,7 +231,8 @@ var utils = {
 
     /**example tests.check("selector")*/
     check: function (selector) {
-        browser.wait(element(selector).isPresent(), TIMEOUT);
+        browser.wait(element(selector).isPresent(), TIMEOUT,
+            'Wait element timed out :' + selector);
     },
 
     checkFileContent: function (file, expected) {
@@ -328,7 +329,7 @@ var utils = {
                     console.log(value);
                     return value;
                 });
-        }, TIMEOUT);
+        }, TIMEOUT, 'Wait element timed out :' + selector);
     },
 
     /**example tests.getElementCount(selector)*/
@@ -427,7 +428,7 @@ var utils = {
         browser.actions().mouseMove(element(selector)).perform();
         return browser.wait(function () {
             return element(selector).isDisplayed();
-        }, TIMEOUT);
+        }, TIMEOUT, 'Wait element timed out :' + selector);
     },
 
     /**example tests.makeImage('asdasdzz1.jpeg')*/
@@ -561,13 +562,37 @@ var utils = {
 
     waitForElement : function (selector, timeout) {
         browser.wait(function () {
-            console.log('check : ' + selector);
+            console.log('wait for element : ' + selector);
             return element(selector).isPresent().then(function (isPresent) {
                 if (isPresent) {
                     return element(selector).isDisplayed();
                 }
             });
-        }, timeout || TIMEOUT);
+        }, timeout || TIMEOUT, 'Wait element timed out :' + selector);
+    },
+
+    waitForSelector : function (selector) {
+        var i = 0;
+        var _retryOnErr = function(err) {
+            console.log(colors.redBG('WARNING: wait retrying iteration: ' + i + ''));
+            browser.sleep(500);
+            return false;
+        };
+        browser.driver.wait(function() {
+            i++;
+            return element(selector).isPresent().then(function(present) {
+                if (present) {
+                    return true;
+                } else {
+                    return _retryOnErr();
+                }
+            }, _retryOnErr);
+        }, TIMEOUT, 'Error waiting for element present: ' + selector).
+        then(function(waitRetValue) {
+            return waitRetValue;
+            }, function(err) {
+                throw err + ' after ' + i + ' iterations.';
+        });
     },
 
     waitForElementToDisappear: function (selector, timeout) {
@@ -578,7 +603,7 @@ var utils = {
                     return _this.not(element(selector).isDisplayed());
                 }
             });
-        }, timeout || TIMEOUT);
+        }, timeout || TIMEOUT, 'Wait element timed out :' + selector);
     },
 
     clearAndSetValue: function (selector, value) {
@@ -598,6 +623,13 @@ var utils = {
         });
     },
 
+    hasContainValue: function (selector, expectedValue) {
+        return element(selector).getAttribute('value').then(function (value) {
+            console.log('value: ' + value);
+            expect(value).toContain(expectedValue);
+        });
+    },
+
     checkReadonly: function (selector, expectedValue) {
         expect(element(selector).getAttribute('readonly')).toBe('true')
     },
@@ -609,7 +641,7 @@ var utils = {
                     console.log(expectedUrl);
                     return expectedUrl == (url);
                 });
-            }, timeout || TIMEOUT);
+            }, timeout || TIMEOUT, 'Wait element timed out :' + selector);
         });
     },
 

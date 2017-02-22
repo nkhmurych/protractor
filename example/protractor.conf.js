@@ -11,6 +11,7 @@ exports.config = {
         global.DEFAULT_WIDTH = 1280;
         global.DEFAULT_HEIGHT = 1024;
         global.fs = require('fs');
+        global.colors = require('./modules/colors');
 
         require('./helpers/globals/selector.js');
         require('./helpers/globals/config/matchers.js');
