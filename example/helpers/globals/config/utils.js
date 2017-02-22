@@ -574,7 +574,8 @@ var utils = {
     waitForSelector : function (selector) {
         var i = 0;
         var _retryOnErr = function(err) {
-            console.log(colors.redBG('WARNING: wait retrying iteration: ' + i + ''));
+            console.log(colors.magenta('WARNING: wait element '+ selector +
+                ' retrying iteration: ' + i + ''));
             browser.sleep(500);
             return false;
         };
