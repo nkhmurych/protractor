@@ -22,7 +22,6 @@ exports.config = {
 
         global.settings = require('./helpers/environment/testData');
         global.helper = require('./helpers/globals/config/utils');
-        global.randomData = require('./helpers/functions/randomData.js');
         global.tests = helper.utils;
 
         global.path = './helpers/functions/';
