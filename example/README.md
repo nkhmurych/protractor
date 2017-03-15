@@ -51,8 +51,9 @@ install protractor (if run tests in local machine):
     npm install jasmine-allure-reporter
     npm install testrail-promise
 
-Allure report
+#Allure report
 -------------
-#RUN:
+RUN:
+-----
     mvn site -Dallure.results_pattern=allure-results
     mvn jetty:run -Djetty.port=1234
